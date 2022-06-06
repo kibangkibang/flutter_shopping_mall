@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       },
       initialRoute: '/',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.green,
       ),
     );
   }

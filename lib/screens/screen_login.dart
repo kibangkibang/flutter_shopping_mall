@@ -5,7 +5,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('로그인'),
+      ),
       body: Center(
           child: Column(
         children: [
@@ -30,6 +32,7 @@ class EmailInput extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
         onChanged: (email) {},
+        keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(labelText: '이메일', helperText: ''),
       ),
     );
@@ -77,7 +80,7 @@ class RegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return TextButton(onPressed: () {
-      
+      Navigator.of(context).pushNamed('/register');
     }, child: Text('이메일로 간단하게 회원가입하기',style: TextStyle(
       color: theme.primaryColor
     ),));
