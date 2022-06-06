@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "272759135129-q2953pnfbb8fhnke7sroibibc16k64bc.apps.googleusercontent.com",
+              "client_id": "272759135129-3f4qf7rf27fhlrpet3dugmtb0ulp1p5n.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.toDoList"
+                "bundle_id": "com.example.flutterShoppingMall"
               }
             }
           ]
@@ -67,10 +67,10 @@
               "client_type": 3
             },
             {
-              "client_id": "272759135129-q2953pnfbb8fhnke7sroibibc16k64bc.apps.googleusercontent.com",
+              "client_id": "272759135129-3f4qf7rf27fhlrpet3dugmtb0ulp1p5n.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.toDoList"
+                "bundle_id": "com.example.flutterShoppingMall"
               }
             }
           ]
