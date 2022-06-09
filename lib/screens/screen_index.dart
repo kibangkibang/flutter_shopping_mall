@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_shopping_mall/models/model_auth.dart';
 import 'package:flutter_shopping_mall/tabs/tab_cart.dart';
 import 'package:flutter_shopping_mall/tabs/tab_home.dart';
 import 'package:flutter_shopping_mall/tabs/tab_profile.dart';
 import 'package:flutter_shopping_mall/tabs/tab_search.dart';
+import 'package:provider/provider.dart';
 
 class IndexScreen extends StatefulWidget {
 
@@ -20,8 +23,24 @@ class _IndexScreenState extends State<IndexScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    final authClient = Provider.of<FirebaseAuthProvider>(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          InkWell(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(0,0,15,0),
+              child: Icon(Icons.logout),
+            ),onTap: () async{
+              await authClient.logout();
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text('로그아웃 되었습니다.')));
+                Navigator.of(context).pushReplacementNamed('/login');
+            },
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home),label: '홈'),

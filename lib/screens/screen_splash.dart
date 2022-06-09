@@ -62,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('images/owl.png'),
+          Image.asset('images/logo.png'),
           Padding(padding: EdgeInsets.all(25)),
           CircularProgressIndicator(color: Colors.black26),
         ],
