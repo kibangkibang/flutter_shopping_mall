@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Item{
   late String title;
   late String description;
@@ -16,4 +18,15 @@ class Item{
     required this.registerDate,
     required this.id
   });
+
+  Item.fromSnapshot(DocumentSnapshot snapshot){
+    Map<String,dynamic> data = snapshot.data() as Map<String,dynamic>;
+    id = snapshot.id;
+    title = data['title'];
+    description = data['description'];
+    brand = data['brand'];
+    imageUrl = data['imageUrl'];
+    price = data['price'];
+    registerDate = data['registerDate'];
+  }
 }
