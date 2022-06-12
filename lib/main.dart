@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shopping_mall/models/model_auth.dart';
 import 'package:flutter_shopping_mall/models/model_item_provider.dart';
 import 'package:provider/provider.dart';
@@ -23,29 +24,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => FirebaseAuthProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ItemProvider(),
-        )
-      ],
-      child: MaterialApp(
-        title: 'Flutter Shopping Mall',
-        routes: {
-          '/': (context) => SplashScreen(),
-          '/index': (context) => IndexScreen(),
-          '/login': (context) => LoginScreen(),
-          '/register': (context) => RegisterScreen(),
-          '/detail': (context) => DetailScreen(),
-          '/search': (context) => SearchScreen(),
-        },
-        initialRoute: '/',
-        theme: ThemeData(
-          primarySwatch: Colors.indigo,
-        ),
-      ),
-    );
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => FirebaseAuthProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => ItemProvider(),
+          )
+        ],
+        child: ScreenUtilInit(
+          designSize: Size(390, 844),
+          builder: (context, child) => MaterialApp(
+            title: 'Flutter Shopping Mall',
+            routes: {
+              '/': (context) => SplashScreen(),
+              '/index': (context) => IndexScreen(),
+              '/login': (context) => LoginScreen(),
+              '/register': (context) => RegisterScreen(),
+              '/detail': (context) => DetailScreen(),
+              '/search': (context) => SearchScreen(),
+            },
+            initialRoute: '/',
+            theme: ThemeData(
+              primarySwatch: Colors.indigo,
+            ),
+          ),
+        ));
   }
 }
