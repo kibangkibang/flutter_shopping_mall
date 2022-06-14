@@ -27,9 +27,23 @@ class ItemProvider extends ChangeNotifier {
       return;
     }
     for (Item item in items) {
-      if (item.title.contains(query)) {
+      if (item.title.toString().toLowerCase().contains(query)) {
         searchItems.add(item);
       }
+    }
+    notifyListeners();
+  }
+
+  Future<void> getItems() async {
+    items = await itemsReference.get().then((QuerySnapshot results) {
+      return results.docs.map(
+        (DocumentSnapshot document) {
+          return Item.fromSnapshot(document);
+        },
+      ).toList();
+    });
+    for (Item item in items) {
+      searchItems.add(item);
     }
     notifyListeners();
   }

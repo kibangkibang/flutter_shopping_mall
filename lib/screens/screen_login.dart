@@ -90,8 +90,8 @@ class LoginButton extends StatelessWidget {
                 ..showSnackBar(SnackBar(
                     content:
                         Text(authClient.user!.email!.toString() + '님 환영합니다.')));
-                        Navigator.pushReplacementNamed(context,'/index');
-            }else{
+              Navigator.pushReplacementNamed(context, '/index');
+            } else {
               Scaffold.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(

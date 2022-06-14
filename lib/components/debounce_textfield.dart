@@ -14,8 +14,6 @@ class DebounceTextField extends StatefulWidget {
 }
 
 class _DebounceTextField extends State<DebounceTextField> {
-  List<Item> _data = [];
-  List<Item> _filterData = [];
   final _searchQuery = new TextEditingController();
   Timer? _debounce;
   String searchText = "";
@@ -23,9 +21,6 @@ class _DebounceTextField extends State<DebounceTextField> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    _filterData = this._data;
-
     _searchQuery.addListener(_onSearchChanged);
   }
 
@@ -61,8 +56,14 @@ class _DebounceTextField extends State<DebounceTextField> {
       ),
       body: ListView.separated(
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(itemProvider.searchItems[index].title),
+          return InkWell(
+            child: ListTile(
+              title: Text(itemProvider.searchItems[index].title),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/detail',
+                  arguments: itemProvider.searchItems[index]);
+            },
           );
         },
         itemCount: itemProvider.searchItems.length,
@@ -80,6 +81,9 @@ class _DebounceTextField extends State<DebounceTextField> {
     _debounce = Timer(
       const Duration(milliseconds: 250),
       () {
+        if (_searchQuery.text == '') {
+          itemProvider.getItems();
+        }
         searchQuery.updateText(_searchQuery.text);
         itemProvider.search(_searchQuery.text);
       },
