@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_shopping_mall/models/model_item.dart';
 import 'package:flutter_shopping_mall/models/model_item_provider.dart';
 import 'package:flutter_shopping_mall/models/model_query.dart';
 import 'package:provider/provider.dart';
@@ -26,52 +25,57 @@ class _DebounceTextField extends State<DebounceTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final itemProvider = Provider.of<ItemProvider>(context);
-    final searchQuery = Provider.of<SearchQuery>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          children: [
-            TextField(
-              autofocus: true,
-              controller: _searchQuery,
-              decoration: InputDecoration(
-                hintText: '검색어를 입력하세요.',
-                border: InputBorder.none,
-              ),
-              maxLines: 1,
-              cursorColor: Colors.grey,
-              cursorWidth: 1.5,
+    final itemProvider = Provider.of<ItemProvider>(context, listen: false);
+    final searchQuery = Provider.of<SearchQuery>(context, listen: false);
+    return WillPopScope(
+        onWillPop: () async {
+          itemProvider.searchItems = [];
+          return true;
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: Column(
+              children: [
+                TextField(
+                  autofocus: true,
+                  controller: _searchQuery,
+                  decoration: InputDecoration(
+                    hintText: '검색어를 입력하세요.',
+                    border: InputBorder.none,
+                  ),
+                  maxLines: 1,
+                  cursorColor: Colors.grey,
+                  cursorWidth: 1.5,
+                ),
+              ],
             ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            onPressed: _onSearchChanged,
-            icon: Icon(Icons.search_rounded),
-          )
-        ],
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
-      body: ListView.separated(
-        itemBuilder: (context, index) {
-          return InkWell(
-            child: ListTile(
-              title: Text(itemProvider.searchItems[index].title),
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, '/detail',
-                  arguments: itemProvider.searchItems[index]);
+            actions: [
+              IconButton(
+                onPressed: _onSearchChanged,
+                icon: Icon(Icons.search_rounded),
+              )
+            ],
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.black),
+          ),
+          body: ListView.separated(
+            itemBuilder: (context, index) {
+              return InkWell(
+                child: ListTile(
+                  title: Text(itemProvider.searchItems[index].title),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/detail',
+                      arguments: itemProvider.searchItems[index]);
+                },
+              );
             },
-          );
-        },
-        itemCount: itemProvider.searchItems.length,
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider();
-        },
-      ),
-    );
+            itemCount: itemProvider.searchItems.length,
+            separatorBuilder: (BuildContext context, int index) {
+              return Divider();
+            },
+          ),
+        ));
   }
 
   _onSearchChanged() {

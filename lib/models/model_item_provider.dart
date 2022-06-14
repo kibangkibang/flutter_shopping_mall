@@ -27,7 +27,7 @@ class ItemProvider extends ChangeNotifier {
       return;
     }
     for (Item item in items) {
-      if (item.title.toString().toLowerCase().contains(query)) {
+      if (item.title.toString().toLowerCase().contains(query.toLowerCase())) {
         searchItems.add(item);
       }
     }
