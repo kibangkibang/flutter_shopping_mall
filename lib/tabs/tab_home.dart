@@ -25,6 +25,7 @@ class HomeTab extends StatelessWidget {
               Container(
                   child: CarouselSlider(
                 options: CarouselOptions(
+                  enlargeCenterPage: true,
                   height: 200.0,
                   autoPlay: true,
                   autoPlayInterval: Duration(seconds: 5),

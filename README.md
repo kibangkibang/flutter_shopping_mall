@@ -1,3 +1,7 @@
+# 6월 19일
+- 홈 화면에 ListView를 넣고 그 안에 carousel과 GridView를 구현함.
+- 장바구니 기능을 위한 Items 모델링(fromMap, toSnapshot) 구현.
+
 # 6월 14일
 - 조회, 상세조회, 검색기능 구현
 - 검색기능 버그 수정
