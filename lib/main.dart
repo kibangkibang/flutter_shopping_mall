@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shopping_mall/models/model_auth.dart';
+import 'package:flutter_shopping_mall/models/model_cart.dart';
 import 'package:flutter_shopping_mall/models/model_item_provider.dart';
 import 'package:flutter_shopping_mall/models/model_query.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => SearchQuery(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => CartProvider(),
           )
         ],
         child: ScreenUtilInit(
