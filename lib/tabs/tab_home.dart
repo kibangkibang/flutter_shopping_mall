@@ -1,13 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_shopping_mall/models/model_item.dart';
 import 'package:flutter_shopping_mall/models/model_item_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
-List<String> categories = ["test1", "test2", "test3", "test4"];
 
 class HomeTab extends StatefulWidget {
   @override
@@ -15,6 +10,7 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+  List<String> categories = ["3개월", "6개월", "1년", "3년"];
   int _current = 0;
   final CarouselController _controller = CarouselController();
   @override
@@ -26,7 +22,7 @@ class _HomeTabState extends State<HomeTab> {
       future: itemProvider.fetchItems(),
       builder: (context, snapshot) {
         if (itemProvider.items.length == 0) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else {
@@ -38,6 +34,11 @@ class _HomeTabState extends State<HomeTab> {
                       length: categories.length,
                       child: PreferredSize(
                           child: Container(
+                            decoration: const BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                        width: 0.3, color: Colors.indigo)),
+                                color: Colors.white),
                             child: TabBar(
                               tabs: List.generate(
                                   categories.length,
@@ -46,9 +47,16 @@ class _HomeTabState extends State<HomeTab> {
                                       )),
                               labelColor: Colors.indigo,
                               unselectedLabelColor: Colors.black45,
+                              labelStyle: const TextTheme().headline2?.copyWith(
+                                  color: Colors.indigo,
+                                  fontWeight: FontWeight.bold),
+                              indicator: const UnderlineTabIndicator(
+                                  borderSide: BorderSide(
+                                      width: 2, color: Colors.indigo)),
                             ),
                           ),
-                          preferredSize: Size.fromHeight(42)))),
+                          preferredSize: const Size.fromHeight(42))),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 15)),
               Container(
                   child: CarouselSlider(
                 carouselController: _controller,
@@ -56,8 +64,9 @@ class _HomeTabState extends State<HomeTab> {
                     enlargeCenterPage: true,
                     height: 180.0,
                     autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 5),
-                    autoPlayAnimationDuration: Duration(milliseconds: 1500),
+                    autoPlayInterval: const Duration(seconds: 5),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 1500),
                     onPageChanged: (index, reason) {
                       setState(() {
                         _current = index;
@@ -68,7 +77,7 @@ class _HomeTabState extends State<HomeTab> {
                     builder: (BuildContext context) {
                       return Container(
                         width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
                           color: Colors.black12,
                           borderRadius: BorderRadius.circular(10),
@@ -77,11 +86,11 @@ class _HomeTabState extends State<HomeTab> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 'VOO',
                                 style: TextStyle(fontSize: 20),
                               ),
-                              Text('data'),
+                              const Text('data'),
                             ],
                           ),
                         ),
@@ -96,26 +105,25 @@ class _HomeTabState extends State<HomeTab> {
                   return GestureDetector(
                     onTap: () => _controller.animateToPage(entry.key),
                     child: Container(
-                      width: 12.0,
-                      height: 12.0,
-                      margin:
-                          EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                      width: 13.0,
+                      height: 15.0,
+                      margin: const EdgeInsets.fromLTRB(10, 15, 10, 0),
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: (Theme.of(context).brightness ==
                                       Brightness.dark
                                   ? Colors.white
                                   : Colors.black)
-                              .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                              .withOpacity(_current == entry.key ? 1.0 : 0.4)),
                     ),
                   );
                 }).toList(),
               ),
-              Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 15)),
+              const Padding(padding: const EdgeInsets.fromLTRB(0, 15, 0, 15)),
               GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, childAspectRatio: 1 / 1.4),
                   itemCount: itemProvider.items.length,
                   itemBuilder: (context, index) {
@@ -126,19 +134,19 @@ class _HomeTabState extends State<HomeTab> {
                               arguments: itemProvider.items[index]);
                         },
                         child: Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Image.network(itemProvider.items[index].imageUrl),
                               Text(
                                 itemProvider.items[index].title,
-                                style: TextStyle(fontSize: 18),
+                                style: const TextStyle(fontSize: 18),
                               ),
                               Text(
                                 f.format(itemProvider.items[index].price) + '원',
-                                style:
-                                    TextStyle(fontSize: 16, color: Colors.red),
+                                style: const TextStyle(
+                                    fontSize: 16, color: Colors.red),
                               )
                             ],
                           ),
