@@ -7,6 +7,8 @@ import 'package:flutter_shopping_mall/tabs/tab_profile.dart';
 import 'package:flutter_shopping_mall/tabs/tab_search.dart';
 import 'package:provider/provider.dart';
 
+List<String> categories = ["test1", "test2", "test3", "test4"];
+
 class IndexScreen extends StatefulWidget {
   @override
   State<IndexScreen> createState() => _IndexScreenState();
@@ -20,21 +22,22 @@ class _IndexScreenState extends State<IndexScreen> {
     final authClient = Provider.of<FirebaseAuthProvider>(context);
     return Scaffold(
       // appBar: AppBar(
-      //   actions: [
-      //     InkWell(
-      //       child: Container(
-      //         padding: EdgeInsets.fromLTRB(0,0,15,0),
-      //         child: Icon(Icons.logout),
-      //       ),onTap: () async{
-      //         await authClient.logout();
-      //         ScaffoldMessenger.of(context)
-      //           ..hideCurrentSnackBar()
-      //           ..showSnackBar(SnackBar(content: Text('로그아웃 되었습니다.')));
+      //     actions: [
+      //       InkWell(
+      //         child: Container(
+      //           padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
+      //           child: Icon(Icons.logout),
+      //         ),
+      //         onTap: () async {
+      //           await authClient.logout();
+      //           ScaffoldMessenger.of(context)
+      //             ..hideCurrentSnackBar()
+      //             ..showSnackBar(SnackBar(content: Text('로그아웃 되었습니다.')));
       //           Navigator.of(context).pushReplacementNamed('/login');
-      //       },
+      //         },
+      //       ),
+      //     ],
       //     ),
-      //   ],
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
